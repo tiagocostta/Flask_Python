@@ -10,8 +10,14 @@ def index():
          'index.html'
     )
 
-@app.route("/new_contatos.html")
+@app.route("/contatos.html")
 def contatos():
+    return render_template(
+        'contatos.html'
+    )
+
+@app.route("/new_contatos.html")
+def new_contatos():
     return render_template(
         'new_contatos.html'
     )
