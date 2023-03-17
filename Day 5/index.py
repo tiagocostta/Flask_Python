@@ -54,7 +54,7 @@ def deletar_contato(email):
     for i in range(len(lista_contatos)):
         if lista_contatos[i]['email'] == email: #Verifica o email recebido
             lista_contatos.pop(i)
-        break
+            break
 
     return redirect('/contatos.html')
 
