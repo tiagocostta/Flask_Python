@@ -22,4 +22,10 @@ def new_contatos():
         'new_contatos.html'
     )
 
+@app.route("/sobre.html")
+def sobre():
+    return render_template(
+        'sobre.html '
+    )
+
 app.run(debug=True)
