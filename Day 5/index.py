@@ -48,4 +48,14 @@ def salvar_contato():
     })
     return redirect('/contatos.html')
 
+
+@app.route("/deletar_contato/<email>")
+def deletar_contato(email):
+    for i in range(len(lista_contatos)):
+        if lista_contatos[i]['email'] == email: #Verifica o email recebido
+            lista_contatos.pop(i)
+        break
+
+    return redirect('/contatos.html')
+
 app.run(debug=True)
