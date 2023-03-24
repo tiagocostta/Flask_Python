@@ -58,4 +58,19 @@ def deletar_contato(email):
 
     return redirect('/contatos.html')
 
+
+@app.route("/editar_contato/<nome>/<email>/<celular>/<tag>")
+def editar_contato(nome, email, celular, tag):
+    position = 0
+
+    for i in lista_contatos:
+        if i["email"] == email:
+            break
+        
+        position += 1
+    
+    return render_template(
+        'editar_contato.html'
+    ) 
+
 app.run(debug=True)

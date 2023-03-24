@@ -25,10 +25,12 @@
     </thead>
     <tbody>
       {% for i in usuarios %}
-        <tr>
-          <td>{{i.nome}}</td>
-          <td>{{i.idade}}</td>
-        </tr>
+        {% if i.idade < 30 %}
+          <tr>
+            <td>{{i.nome}}</td>
+            <td>{{i.idade}}</td>
+          </tr>
+        {% endif %}
       {% endfor %}
 
     </tbody>
