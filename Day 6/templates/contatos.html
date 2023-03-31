@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Contatos{% endblock %}
+
+{% block body %}
+<div style="text-align: right;">
+  <a class="waves-effect waves-light btn" href="new_contatos.html">
+    <i class="material-icons right">add</i>Adicionar novos contatos
+  </a>
+</div>
+
+<table class="striped">
+  <thead>
+    {% for i in lista_contatos%}
+    <tr>
+      <td>{{i.nome}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.celular}}</td>
+      <td>
+        <div class="chip">
+          <i class="tiny material-icons" insert_chart>{{i.link}}</i>
+          {{i.tag}}
+        </div>
+      </td>
+      <td>
+        <a class="waves-effect #f44336 red btn-small" href="/deletar_contato/{{i.email}}">
+          <i class="material-icons right">delete</i>
+          Deletar
+        </a>
+        <a class="waves-effect waves-light btn-small"
+          href="/editar_contato/{{i.nome}}/{{i.email}}/{{i.celular}}/{{i.tag}}">
+          <i class="material-icons right">create</i>
+          Editar
+        </a>
+      </td>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table>
+{% endblock %}
