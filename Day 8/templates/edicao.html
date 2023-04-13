@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Contato{% endblock %}
+
+{% block body %}
+<div class="row">
+    <form class="col s12" action="/editar_contato/{{pessoa.id}}" method="post">
+        <div class="row">
+            <div style="text-align: right;">
+                <button class="waves-effect waves-light btn-small" type="submit">
+                    <i class="material-icons right">add</i>
+                    ATUALIZAR CONTATO
+                </button>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="name" type="text" class="validate" name="nome" value="{{pessoa.nome}}">
+                <label for="name">Nome</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">email</i>
+                <input id="mail" type="text" class="validate" name="email" value="{{pessoa.email}}">
+                <label for="mail">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="fone" type="text" class="validate" name="celular" value="{{pessoa.celular}}">
+                <label for="fone">Telefone</label>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="tag" type="text" list="opcoes" class="validate" name="tag" value="{{pessoa.tag}}">
+                    <datalist id="opcoes">
+                        <option value="família">
+                        <option value="trabalho">
+                        <option value="amigo">
+                    </datalist>
+                    <label for="tag">Tag</label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    // seleciona o campo de entrada do telefone
+    const foneInput = document.getElementById('fone');
+
+    // adiciona um evento de teclado para detectar quando uma tecla é pressionada
+    foneInput.addEventListener('keyup', function(event) {
+        // obtém o valor atual do campo de entrada
+        let fone = foneInput.value;
+
+        // remove quaisquer parênteses e traços existentes
+        fone = fone.replace('(', '').replace(')', '').replace('-', '');
+
+        // adiciona os parênteses nos locais corretos
+        if (fone.length > 0) {
+            fone = '(' + fone;
+        }
+        if (fone.length > 2) {
+            fone = fone.slice(0, 3) + ')' + fone.slice(3);
+        }
+        if (fone.length > 8) {
+            fone = fone.slice(0, 9) + '-' + fone.slice(9);
+        }
+
+        // atualiza o valor do campo de entrada com o número formatado
+        foneInput.value = fone;
+    });
+</script>
+
+{% endblock %}

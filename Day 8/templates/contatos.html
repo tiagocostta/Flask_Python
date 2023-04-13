@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Contato{% endblock %}
+
+{%block body %}
+<div style="text-align: right;">
+    <a class="waves-effect waves-light btn" href="/new_contatos">
+        <i class="material-icons right">add</i>Adicionar novos contatos
+    </a>
+</div>
+<br>
+
+
+<table class="highlight">
+    <thead style="background-color: #e0e0e0;">
+        <tr>
+            <td>Nome</td>
+            <td>Email</td>
+            <td>Telefone</td>
+            <td>Tag</td>
+            <td>...</td>
+        </tr>
+        {% for c in contato: %}
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{c.nome}}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.celular}}</td>
+            <td>
+                <div class="chip">
+                    <i class="tiny material-icons" insert_chart>{{c.link}}</i>
+                    {{c.tag}}
+                  </div>
+            </td>
+            <td>
+                <a class="waves-effect #f44336 red btn-small" href="/deletar_contato/{{c.id}}">
+                    <i class="material-icons right">delete</i>
+                    Deletar
+                  </a>
+                  <a class="waves-effect waves-light btn-small" href="/editar/{{c.id}}">
+                    <i class="material-icons right">create</i>
+                    Editar
+                  </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
