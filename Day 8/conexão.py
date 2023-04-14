@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # Maneira que vimos a conexão com o banco até agora
-#engine = create_engine("mysql+pymysql://root:@localhost:3306/contatos")
+# engine = create_engine("mysql+pymysql://root:@localhost:3306/contatos")
 
 engine = create_engine("sqlite:///infinity.db",
                        connect_args={'check_same_thread': False})
@@ -11,6 +11,7 @@ engine = create_engine("sqlite:///infinity.db",
 Base = declarative_base()
 
 
+# Criação da tabela do banco de dados por meio de uma classe
 class Contatos(Base):
     __tablename__ = "contatos"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -21,8 +22,10 @@ class Contatos(Base):
     link = Column(String(10))
 
 
+# Variavel especifica para pegar as informações do banco de dados
 inspetor = inspect(engine)
 
+# Condição para verificar se já existe uma tabela com mesmo nome
 if "contatos" not in inspetor.get_table_names():
     Base.metadata.create_all(engine)
 

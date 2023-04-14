@@ -3,9 +3,16 @@ from conexão import *
 app = Flask(__name__)
 
 
+# Criação da primeira rota da pagina inicial
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+'''
+Rota de contato junto com o parametro de contatos 
+puxando do banco de dados
+'''
 
 
 @app.route("/contatos")
@@ -16,9 +23,16 @@ def contatos():
     )
 
 
+# Rota do sobre será editado pelos alunos
 @app.route("/sobre")
 def sobre():
     return render_template("sobre.html")
+
+
+'''
+Rota da aba de criação de contatos nela terá 
+o rediricionamento
+'''
 
 
 @app.route("/new_contatos")
@@ -26,8 +40,18 @@ def new_contatos():
     return render_template("new_contatos.html")
 
 
+'''
+Rota especifica para adicição de dado no banco 
+de dados atraves do metodo post
+'''
+
+
 @app.route("/salvar_contato", methods=["POST"])
 def salva_contato():
+    '''
+    Condição para pegar o nome do icone de acordo 
+    com o que a pessoa escreveu
+    '''
     if request.form.to_dict()['tag'] == "família":
         img = "group"
     elif request.form.to_dict()['tag'] == "trabalho":
@@ -35,6 +59,7 @@ def salva_contato():
     else:
         img = "person"
 
+    # Adicição do contato no banco de dados
     contato = Contatos(
         nome=request.form.to_dict()['nome'],
         email=request.form.to_dict()['email'],
@@ -49,6 +74,7 @@ def salva_contato():
     return redirect("contatos")
 
 
+# Rota especifica para exclusão de alunos a parti do id
 @app.route("/deletar_contato/<id>")
 def deletar_contato(id):
     pessoa = session.query(Contatos).filter(Contatos.id == id).one()
@@ -59,6 +85,12 @@ def deletar_contato(id):
     return redirect("/contatos")
 
 
+'''
+Rota de edição de dados pegando informação com id 
+e mandando-as para uma página
+'''
+
+
 @app.route("/editar/<id>")
 def editar_contato(id):
     pessoa = session.query(Contatos).filter(Contatos.id == id).one()
@@ -67,6 +99,12 @@ def editar_contato(id):
         "edicao.html",
         pessoa=pessoa
     )
+
+
+'''
+Rota parecida com a criar contato, só que aqui é passado 
+o metodo post para a atualização de dados do contato
+'''
 
 
 @app.route("/editar_contato/<id>", methods=["POST"])
